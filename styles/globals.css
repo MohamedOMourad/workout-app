@@ -24,6 +24,14 @@ a {
     background: black;
   }
 } */
+.login-img {
+  background-image: url('../public/assets/images/login.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: calc(100% /3 * 2)
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
