@@ -39,7 +39,7 @@ model Workout {
   imgUrl    String
   createdAt DateTime @default(now()) @db.Timestamp(6)
   users     Workout_History[]
-  exercises Exercise[]
+  exercises WorkoutLine[]
 }
 
 model WorkoutLine{
@@ -47,10 +47,10 @@ model WorkoutLine{
   set        Int   
   weight     Int 
   reps       Int 
-  workout    Workout @relation(fields: [workoutId], references: [id])
   workoutId  Int
-  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  workout    Workout @relation(fields: [workoutId], references: [id])
   exerciseId Int
+  exercise  Exercise     @relation(fields: [exerciseId], references: [id])
   }  
 
 model Exercise {
@@ -59,7 +59,7 @@ model Exercise {
   description String
   imgUrl      String
   createdAt   DateTime @default(now()) @db.Timestamp(6)
-  workouts    Workout[]
+  workouts    WorkoutLine[]
 }
 
 
