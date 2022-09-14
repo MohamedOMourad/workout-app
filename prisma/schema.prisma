@@ -23,3 +23,11 @@ model User {
   imgUrl    String
   createdAt DateTime @default(now()) @db.Timestamp(6)
 }
+
+model Workout {
+  id        Int      @id @default(autoincrement())
+  name      String
+  imgUrl    String
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+}
+
