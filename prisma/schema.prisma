@@ -42,6 +42,17 @@ model Workout {
   exercises Exercise[]
 }
 
+model WorkoutLine{
+   id        Int      @id @default(autoincrement())
+  set        Int   
+  weight     Int 
+  reps       Int 
+  workout    Workout @relation(fields: [workoutId], references: [id])
+  workoutId  Int
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId Int
+  }  
+
 model Exercise {
   id          Int      @id @default(autoincrement())
   name        String
@@ -50,6 +61,6 @@ model Exercise {
   createdAt   DateTime @default(now()) @db.Timestamp(6)
   workouts    Workout[]
 }
-  
+
 
 
