@@ -7,6 +7,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const exercise = await prisma.exercise.findMany();
-  res.status(200).json({ exercise });
+  const exercises = await prisma.exercise.findMany();
+  res.status(200).json({ exercises });
 }
