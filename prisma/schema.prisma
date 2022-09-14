@@ -11,56 +11,68 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  firstName String
-  lastName  String
-  email     String
-  password  String
-  gender    String
-  age       Int
-  height    Int
-  weight    Int
-  imgUrl    String
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  workouts Workout_History[]
+  id            Int      @id @default(autoincrement())
+  firstName     String
+  lastName      String
+  email         String
+  password      String
+  gender        String
+  age           Int
+  height        Int
+  weight        Int
+  imgUrl        String
+  createdAt     DateTime @default(now()) @db.Timestamp(6)
+  workouts      Workout_History[]
+  workoutLines   UserRecord[]
 }
 model Workout_History {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  workoutId Int
-  workout   Workout  @relation(fields: [workoutId], references: [id])
+  id            Int      @id @default(autoincrement())
+  createdAt     DateTime @default(now()) @db.Timestamp(6)
+  userId        Int
+  user          User     @relation(fields: [userId], references: [id])
+  workoutId     Int
+  workout       Workout  @relation(fields: [workoutId], references: [id])
 }
 
 model Workout {
-  id        Int      @id @default(autoincrement())
-  name      String
-  imgUrl    String
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  users     Workout_History[]
-  exercises WorkoutLine[]
+  id            Int      @id @default(autoincrement())
+  name          String
+  imgUrl        String
+  createdAt     DateTime @default(now()) @db.Timestamp(6)
+  users         Workout_History[]
+  exercises     WorkoutLine[]
 }
 
 model WorkoutLine{
-   id        Int      @id @default(autoincrement())
-  set        Int   
-  weight     Int 
-  reps       Int 
-  workoutId  Int
-  workout    Workout @relation(fields: [workoutId], references: [id])
-  exerciseId Int
-  exercise  Exercise     @relation(fields: [exerciseId], references: [id])
+   id           Int      @id @default(autoincrement())
+  set           Int   
+  weight        Int 
+  reps          Int 
+  workoutId     Int
+  workout       Workout @relation(fields: [workoutId], references: [id])
+  exerciseId    Int
+  exercise      Exercise     @relation(fields: [exerciseId], references: [id])
+  users         UserRecord[]
   }  
 
 model Exercise {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  imgUrl      String
-  createdAt   DateTime @default(now()) @db.Timestamp(6)
-  workouts    WorkoutLine[]
+  id            Int      @id @default(autoincrement())
+  name          String
+  description   String
+  imgUrl        String
+  createdAt     DateTime @default(now()) @db.Timestamp(6)
+  workouts      WorkoutLine[]
 }
 
-
+model UserRecord {
+  id            Int      @id @default(autoincrement())
+  step          Int
+  reps          Int
+  weight        Int
+  createdAt     DateTime @default(now()) @db.Timestamp(6)
+  userId        Int
+  user          User @relation(fields: [userId], references: [id])
+  workoutLineId Int
+  workoutLine   WorkoutLine @relation(fields: [workoutLineId], references: [id])
+}
 
