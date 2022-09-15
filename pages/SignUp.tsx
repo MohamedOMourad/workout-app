@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+ import * as Yup from 'yup';
 import { createUser } from "../utils/API";
 
 export default function SignUp() {
