@@ -42,4 +42,3 @@ export default async function handler(
     default:
       res.status(404).json("Not Found!");
   }
-
