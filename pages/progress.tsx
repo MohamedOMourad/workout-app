@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Dashboard = () => {
+const Progress = () => {
     return (
         <div>
-            DashBoard
+            Progress
         </div>
     )
 }
 
-export default Dashboard;
+export default Progress;

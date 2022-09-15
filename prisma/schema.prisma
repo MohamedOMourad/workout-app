@@ -25,6 +25,7 @@ model User {
   workouts      Workout_History[]
   workoutLines   UserRecord[]
 }
+
 model Workout_History {
   id            Int      @id @default(autoincrement())
   createdAt     DateTime @default(now()) @db.Timestamp(6)

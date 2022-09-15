@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Dashboard = () => {
+const Calender = () => {
     return (
         <div>
-            DashBoard
+            Calander
         </div>
     )
 }
 
-export default Dashboard;
+export default Calender;
