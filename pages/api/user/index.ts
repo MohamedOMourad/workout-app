@@ -13,11 +13,14 @@ export default async function handler(
     const imgUrl = data.data.results["0"].picture.thumbnail;
     switch (req.method) {
         case "GET":
-            const users = await prisma.user.findMany();
-            res.status(200).json({ users });
+            const user = await prisma.user.findFirst({ where: { email } });
+            if (!user) {
+                return res.json({ status: "failed", message: "User Not Found" });
+            }
+            res.status(200).json({ user });
             break;
         case "POST":
-            const user = await prisma.user.create({
+            const newUser = await prisma.user.create({
                 data: {
                     firstName,
                     lastName,
@@ -30,7 +33,7 @@ export default async function handler(
                     imgUrl,
                 }
             })
-            res.status(200).json({ user });
+            res.status(200).json({ newUser });
             break;
         default:
             res.status(404).json("Not Found!");
