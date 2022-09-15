@@ -7,7 +7,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<any>
 ) {
-    const { id }: Partial<{ [key: string]: string | string[]; }> = req.query!
+    const { id }: Partial<{ [key: string]: string | string[]; }> = req.query
     const user = await prisma.user.findUnique({ where: { id: +id! } })
     res.status(200).json({ user })
 }
