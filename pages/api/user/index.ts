@@ -14,7 +14,7 @@ export default async function handler(
     case "GET":
       const user = await prisma.user.findFirst({ where: { email } });
       if (!user) {
-        return res.json({ status: "failed", message: "User Not Found" });
+        return res.status(400).json("user not found");
       }
       res.status(200).json({ user });
       break;
@@ -24,12 +24,12 @@ export default async function handler(
           firstName,
           lastName,
           email,
-          password,
+           password,
           gender,
           age,
-          height,
+           height,
           weight,
-          imgUrl,
+           imgUrl,
         },
       });
       res.status(200).json({ newUser });
