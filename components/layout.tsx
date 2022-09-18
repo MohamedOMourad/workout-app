@@ -13,7 +13,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useRouter } from 'next/router'
 const navigation = [
     { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-    { name: "Browse WorkOut", href: "#", icon: BoltIcon, current: false },
+    { name: "Browse WorkOut", href: "/browseWorkout", icon: BoltIcon, current: false },
     { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
     { name: "Progress", href: "#", icon: ChartBarIcon, current: false },
 ];
@@ -260,6 +260,7 @@ const Layout = ({ children }: childrenProps) => {
                             </div>
                         </div>
                         {children}
+                        
                     </div>
                 </div>
             </>}
