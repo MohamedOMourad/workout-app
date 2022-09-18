@@ -28,12 +28,21 @@ const BrowseWorkout = () => {
       imageAlt:
         "Textured gray felt pouch for paper cards with snap button flap and elastic pen holder loop.",
     },
+    {
+      id: 4,
+      name: "Push Up",
+      href: "#",
+      description: "3 sets x 20 reps",
+      imageSrc: "./assets/images/pushup.jpg",
+      imageAlt:
+        "Textured gray felt pouch for paper cards with snap button flap and elastic pen holder loop.",
+    },
     // More products...
   ];
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="py-6 text-center ">
+      <div className=" text-center mt-16">
         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
           Browse our carefully curated exercises
         </h1>
@@ -43,12 +52,8 @@ const BrowseWorkout = () => {
         </p>
       </div>
       <div>
-        <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-          <h2 id="products-heading" className="sr-only">
-            Products
-          </h2>
-
-          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+        <div className="mx-auto max-w-2xl px-4 sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
+          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8 ">
             {workouts.map((workout) => (
               <a key={workout.id} href={workout.href} className="group">
                 <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg sm:aspect-w-2 sm:aspect-h-3">
