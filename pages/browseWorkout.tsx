@@ -5,7 +5,7 @@ const BrowseWorkout = () => {
     {
       id: 1,
       name: "Knee High Jumps",
-      href: "#",
+      href: "/workOut",
       description: "3 sets x 20 reps",
       imageSrc: "./assets/images/kneeHighJumps.jpg",
       imageAlt:
