@@ -1,9 +1,8 @@
 import { useFormik } from "formik";
 import Link from "next/link";
 import { loginAPI } from "../utils/API";
-import { useUser } from '@supabase/auth-helpers-react'
-import { supabaseClient } from '@supabase/auth-helpers-nextjs'
-import { useEffect, useState } from 'react'
+
+import { useEffect, useState } from "react";
 const Login = () => {
   const formik = useFormik({
     initialValues: {
