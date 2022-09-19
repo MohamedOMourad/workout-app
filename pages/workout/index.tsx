@@ -1,10 +1,11 @@
 import React from "react";
+import Workouts from "../../components/programs";
 
 const BrowseWorkout = () => {
-  const workouts = [
+  const programs = [
     {
       id: 1,
-      name: "Knee High Jumps",
+      name: "Leg Day",
       href: "/workOut",
       description: "3 sets x 20 reps",
       imageSrc: "./assets/images/kneeHighJumps.jpg",
@@ -13,7 +14,7 @@ const BrowseWorkout = () => {
     },
     {
       id: 2,
-      name: "Ab Smasher",
+      name: "Back Day",
       href: "#",
       description: "3 sets x 20 reps",
       imageSrc: "./assets/images/AbSmasher.jpg",
@@ -21,7 +22,7 @@ const BrowseWorkout = () => {
     },
     {
       id: 3,
-      name: "Soccer Jumps",
+      name: "Yoga",
       href: "#",
       description: "3 sets x 20 reps",
       imageSrc: "./assets/images/soccerJumps.jpg",
@@ -30,14 +31,13 @@ const BrowseWorkout = () => {
     },
     {
       id: 4,
-      name: "Push Up",
+      name: "Upper Day",
       href: "#",
       description: "3 sets x 20 reps",
       imageSrc: "./assets/images/pushup.jpg",
       imageAlt:
         "Textured gray felt pouch for paper cards with snap button flap and elastic pen holder loop.",
     },
-    // More products...
   ];
 
   return (
@@ -51,29 +51,7 @@ const BrowseWorkout = () => {
           limits.
         </p>
       </div>
-      <div>
-        <div className="mx-auto max-w-2xl px-4 sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
-          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8 ">
-            {workouts.map((workout) => (
-              <a key={workout.id} href={workout.href} className="group">
-                <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg sm:aspect-w-2 sm:aspect-h-3">
-                  <img
-                    src={workout.imageSrc}
-                    alt={workout.imageAlt}
-                    className="h-full w-full object-cover object-center group-hover:opacity-75"
-                  />
-                </div>
-                <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
-                  <h3>{workout.name}</h3>
-                </div>
-                <p className="mt-1 text-sm italic text-gray-500">
-                  {workout.description}
-                </p>
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
+      <Workouts programs={programs} />
     </div>
   );
 };

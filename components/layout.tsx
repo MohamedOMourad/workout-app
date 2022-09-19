@@ -12,8 +12,8 @@ import {
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useRouter } from 'next/router'
 const navigation = [
-    { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-    { name: "Browse WorkOut", href: "/browseWorkout", icon: BoltIcon, current: false },
+    { name: "Dashboard", href: "/", icon: HomeIcon, current: true },
+    { name: "Browse WorkOut", href: "/workout", icon: BoltIcon, current: false },
     { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
     { name: "Progress", href: "#", icon: ChartBarIcon, current: false },
 ];
