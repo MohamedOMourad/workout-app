@@ -1,3 +1,4 @@
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import React, { useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import WorkoutTable from "../components/workoutTable";
@@ -65,3 +66,6 @@ const Exercise = () => {
 };
 
 export default Exercise;
+export const getServerSideProps = withPageAuth({
+  redirectTo: '/login',
+});

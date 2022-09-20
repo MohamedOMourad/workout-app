@@ -1,12 +1,16 @@
+import { Workout } from "@prisma/client";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import React from "react";
 import Workouts from "../../components/programs";
+import { prisma } from "../../lib/prisma";
 
-const BrowseWorkout = () => {
+const BrowseWorkout = ({ updatedWorkout }:{updatedWorkout:Workout}) => {
+  console.log(updatedWorkout);
   const programs = [
     {
       id: 1,
       name: "Leg Day",
-      href: "/workOut",
+      href: "/workout/1/exercise",
       description: "3 sets x 20 reps",
       imageSrc: "./assets/images/kneeHighJumps.jpg",
       imageAlt:
@@ -57,3 +61,16 @@ const BrowseWorkout = () => {
 };
 
 export default BrowseWorkout;
+
+export const getServerSideProps = withPageAuth({
+  redirectTo: "/login",
+  async getServerSideProps() {
+    // Access the user object
+    const workouts = await prisma.workout.findMany();
+    const updatedWorkout = workouts.map((workout) => {return{
+      ...workout,
+      createdAt: workout.createdAt.getTime(),
+    }});
+    return { props: { updatedWorkout } };
+  },
+});

@@ -1,3 +1,4 @@
+import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import React from 'react'
 import Exercises from '../../../../components/programs'
 
@@ -6,9 +7,9 @@ const index = () => {
     {
       id: 1,
       name: "Knee High Jumps",
-      href: "/workOut",
+      href: "/workout/1/exercise/1",
       description: "3 sets x 20 reps",
-      imageSrc: "./assets/images/kneeHighJumps.jpg",
+      imageSrc: "../../assets/images/kneeHighJumps.jpg",
       imageAlt:
         "Person using a pen to cross a task off a productivity paper card.",
     },
@@ -17,7 +18,7 @@ const index = () => {
       name: "Ab Smasher",
       href: "#",
       description: "3 sets x 20 reps",
-      imageSrc: "./assets/images/AbSmasher.jpg",
+      imageSrc: "../../assets/images/AbSmasher.jpg",
       imageAlt: "Paper card sitting upright in walnut card holder on desk.",
     },
     {
@@ -25,7 +26,7 @@ const index = () => {
       name: "Soccer Jumps",
       href: "#",
       description: "3 sets x 20 reps",
-      imageSrc: "./assets/images/soccerJumps.jpg",
+      imageSrc: "../../assets/images/soccerJumps.jpg",
       imageAlt:
         "Textured gray felt pouch for paper cards with snap button flap and elastic pen holder loop.",
     },
@@ -34,7 +35,7 @@ const index = () => {
       name: "Push Up",
       href: "#",
       description: "3 sets x 20 reps",
-      imageSrc: "./assets/images/pushup.jpg",
+      imageSrc: "../../assets/images/pushup.jpg",
       imageAlt:
         "Textured gray felt pouch for paper cards with snap button flap and elastic pen holder loop.",
     },
@@ -47,3 +48,7 @@ const index = () => {
 }
 
 export default index
+
+export const getServerSideProps = withPageAuth({
+  redirectTo: '/login',
+});
