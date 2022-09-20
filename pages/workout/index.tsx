@@ -1,10 +1,10 @@
 import { Workout } from "@prisma/client";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import React from "react";
-import Workouts from "../../components/programs";
+import Workouts from "../../components/workouts";
 import { prisma } from "../../lib/prisma";
 
-const BrowseWorkout = ({ updatedWorkout }: { updatedWorkout: Workout }) => {
+const BrowseWorkout = ({ updatedWorkout }: { updatedWorkout: Workout[] }) => {
   console.log(updatedWorkout)
   return (
     <div className="min-h-screen bg-gray-100">
@@ -17,7 +17,7 @@ const BrowseWorkout = ({ updatedWorkout }: { updatedWorkout: Workout }) => {
           limits.
         </p>
       </div>
-      <Workouts programs={updatedWorkout} />
+      <Workouts updatedWorkout={updatedWorkout} />
     </div>
   );
 };
@@ -29,10 +29,12 @@ export const getServerSideProps = withPageAuth({
   async getServerSideProps() {
     // Access the user object
     const workouts = await prisma.workout.findMany();
-    const updatedWorkout = workouts.map((workout) => {return{
-      ...workout,
-      createdAt: workout.createdAt.getTime(),
-    }});
+    const updatedWorkout = workouts.map((workout) => {
+      return {
+        ...workout,
+        createdAt: workout.createdAt.getTime(),
+      }
+    });
     return { props: { updatedWorkout } };
   }
 });

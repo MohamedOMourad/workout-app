@@ -1,6 +1,6 @@
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import React from 'react'
-import Exercises from '../../../../components/programs'
+import Exercises from '../../../../components/workouts'
 
 const index = () => {
   const programs = [
