@@ -1,8 +1,11 @@
-import { withPageAuth } from '@supabase/auth-helpers-nextjs';
+import { User } from '@prisma/client';
+import { getUser, withPageAuth } from '@supabase/auth-helpers-nextjs';
 import type { NextPage } from 'next'
 import WorkoutTable from '../components/workoutTable'
+import { prisma } from "../lib/prisma";
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ updatedUser }: { updatedUser?: User }) => {
+  console.log(updatedUser)
   return (
     <>
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-zinc-100 py-10 w-full min-h-screen">
@@ -16,7 +19,7 @@ const Home: NextPage = () => {
               />
             </div>
             <div className="ml-3">
-              <p className="text-2xl font-bold text-gray-900 group-hover:text-gray-900">Good morning, Tom Cook</p>
+              <p className="text-2xl font-bold text-gray-900 group-hover:text-gray-900">Good morning, {updatedUser?.firstName}</p>
               <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">🔥10 Day Streak</p>
             </div>
           </div>
@@ -147,6 +150,11 @@ const Home: NextPage = () => {
 export default Home;
 
 export const getServerSideProps = withPageAuth({
-  redirectTo: '/login',
+  redirectTo: '/login', async getServerSideProps(ctx) {
+    const { user } = await getUser(ctx);
+    const User = await prisma.user.findUnique({ where: { email: user?.email } })
+    const updatedUser = { ...User, createdAt: User?.createdAt.getTime() }
+    return { props: { updatedUser } };
+  }
 });
 

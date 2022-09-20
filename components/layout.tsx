@@ -95,7 +95,7 @@ const Layout = ({ children }: childrenProps) => {
                                         <div className="flex flex-shrink-0 items-center px-4">
                                             <img
                                                 className="h-8 w-auto"
-                                                src="./assets/icons/logo-4.png"
+                                                src={"https://kxjnhcqeqmnytuolbufe.supabase.co/storage/v1/object/public/workout/logo-4.png"}
                                                 alt="Your Company"
                                             />
                                         </div>
@@ -142,7 +142,7 @@ const Layout = ({ children }: childrenProps) => {
                             <div className="flex flex-shrink-0 items-center px-4">
                                 <img
                                     className="h-8 w-auto"
-                                    src="./assets/icons/logo-4.png"
+                                    src={"https://kxjnhcqeqmnytuolbufe.supabase.co/storage/v1/object/public/workout/logo-4.png"}
                                     alt="TAWWR workout"
                                 />
                             </div>
