@@ -14,8 +14,8 @@ import { useRouter } from 'next/router'
 const navigation = [
     { name: "Dashboard", href: "/", icon: HomeIcon, current: true },
     { name: "Browse WorkOut", href: "/workout", icon: BoltIcon, current: false },
-    { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
-    { name: "Progress", href: "#", icon: ChartBarIcon, current: false },
+    { name: "Calendar", href: "/calenderLog", icon: CalendarIcon, current: false },
+    { name: "Progress", href: "/progress", icon: ChartBarIcon, current: false },
 ];
 const userNavigation = [
     { name: "Your Profile", href: "#" },
