@@ -1,3 +1,4 @@
+import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import React from 'react'
 import StockChart from '../components/StockChart';
 const data = {
@@ -59,3 +60,7 @@ const Progress = () => {
 }
 
 export default Progress;
+
+export const getServerSideProps = withPageAuth({
+    redirectTo: '/login',
+  });

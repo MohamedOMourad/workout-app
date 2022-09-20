@@ -1,3 +1,4 @@
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import React from "react";
 import Calender from "../components/calender";
 
@@ -49,20 +50,7 @@ const CalenderLog = () => {
 export default CalenderLog;
 
 
+export const getServerSideProps = withPageAuth({
+  redirectTo: '/login',
+});
 
-
-{/* <div className="my-6 h-full flex rounded-br-3xl rounded-tr-3xl bg-gray-50 shadow sm:rounded-bl-3xl sm:rounded-tl-3xl sm:rounded-tr-none sm:rounded-br-none">
-    <img className="w-1/3 h-full" src="./assets/images/login.jpg" />
-    <div className="w-2/3">
-      <h4 className="font-medium text-gray-900">30 min run</h4>
-      <p className="mt-2 hidden text-sm text-gray-500 sm:block">
-        This durable double-walled insulated tumbler keeps your beverages
-        at the perfect temperature all day long. Hot, cold, or even
-        lukewarm if you're weird like that, this bottle is ready for your
-        next adventure
-      </p>
-      <div className="m-2 mt-2 flex text-sm font-medium sm:mt-2">
-        <a href="#" className="text-black hover:text-black">View Exercise</a>
-      </div>
-    </div>
-  </div> */}
