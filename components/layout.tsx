@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useRouter } from 'next/router'
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 const navigation = [
     { name: "Dashboard", href: "/", icon: HomeIcon, current: true },
     { name: "Browse WorkOut", href: "/workout", icon: BoltIcon, current: false },
@@ -271,3 +272,4 @@ const Layout = ({ children }: childrenProps) => {
 
 
 export default Layout;
+

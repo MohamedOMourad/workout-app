@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { useFormik } from 'formik';
- import * as Yup from 'yup';
+import * as Yup from 'yup';
 import { createUser } from "../utils/API";
+import { supabaseClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from "next/router";
 
 export default function SignUp() {
+  const router = useRouter()
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -16,7 +19,10 @@ export default function SignUp() {
       height: ""
     },
     onSubmit: async (values) => {
+      const res = await supabaseClient.auth.signUp({ email: values.email, password: values.password })
+      await supabaseClient.auth.signIn({ email: values.email, password: values.password })
       await createUser(values)
+      router.push("/")
     },
     // validationSchema: Yup.object({
     // email: Yup.string().email('Invalid Email').required('Required'),

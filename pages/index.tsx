@@ -1,3 +1,4 @@
+import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import type { NextPage } from 'next'
 import WorkoutTable from '../components/workoutTable'
 
@@ -144,3 +145,8 @@ const Home: NextPage = () => {
 }
 
 export default Home;
+
+export const getServerSideProps = withPageAuth({
+  redirectTo: '/login',
+});
+
