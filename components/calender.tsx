@@ -21,7 +21,7 @@ import {
 } from "date-fns";
 import { useState } from "react";
 
-const Calendertest = () => {
+const Calender = () => {
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -90,16 +90,16 @@ const Calendertest = () => {
                   "py-1.5 hover:bg-gray-100 focus:z-10",
                   isSameMonth(day, today) ? "bg-white" : "bg-gray-50",
                   (isEqual(day, selectedDay) || isToday(day)) &&
-                    "font-semibold",
+                  "font-semibold",
                   isEqual(day, selectedDay) && "text-white",
                   !isEqual(day, selectedDay) &&
-                    isSameMonth(day, today) &&
-                    !isToday(day) &&
-                    "text-gray-900",
+                  isSameMonth(day, today) &&
+                  !isToday(day) &&
+                  "text-gray-900",
                   !isEqual(day, selectedDay) &&
-                    !isSameMonth(day, today) &&
-                    !isToday(day) &&
-                    "text-gray-400",
+                  !isSameMonth(day, today) &&
+                  !isToday(day) &&
+                  "text-gray-400",
                   isToday(day) && !isEqual(day, selectedDay) && "text-red-600",
                   dayIdx === 0 && "rounded-tl-lg",
                   dayIdx === 6 && "rounded-tr-lg"
@@ -125,4 +125,4 @@ const Calendertest = () => {
     </div>
   );
 };
-export default Calendertest;
+export default Calender;
