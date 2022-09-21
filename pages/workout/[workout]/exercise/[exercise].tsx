@@ -1,9 +1,11 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { GetStaticPaths, GetStaticProps } from "next";
 import React, { useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import WorkoutTable from "../../../../components/workoutTable";
-
-const Exercise = () => {
+import { prisma } from "../../../../lib/prisma";
+const Exercise = ({ exercises }: any) => {
+  console.log(exercises)
   const [isPlay, setplaying] = useState(false);
   return (
     <div className="min-h-screen bg-gray-100 ">
@@ -18,19 +20,14 @@ const Exercise = () => {
             allowFullScreen></iframe>
         </div>
         <div className="p-10 w-full lg:w-1/2 ">
-          <h1 className="text-5xl font-extrabold">Knee High Jumps</h1>
-          <p className="p-2 text-xl">3 sets x 20 reps</p>
-          <p className="p-2 text-2xl text-left">
-            High knees might seem like a simple exercise to perform, but
-            cranking out a few sets of this high energy move gets your heart
-            pumping, activates your lower body and core muscles, and leads to a
-            quick sweat.
-          </p>
+          <h1 className="text-5xl font-extrabold">{exercises.name}</h1>
+          <p className="p-2 text-xl">{`${exercises.workoutLineRelation[0].set} x ${exercises.workoutLineRelation[0].reps}`}</p>
+          <p className="p-2 text-2xl text-left">{exercises.description}</p>
         </div>
       </div>
       <div className="flex flex-wrap w-full">
         <div className="lg:w-2/3 w-full">
-          <WorkoutTable />
+          <WorkoutTable exercises={exercises} />
         </div>
         <div className=" lg:w-1/3 flex flex-col items-center w-full">
           {isPlay ?
@@ -67,6 +64,29 @@ const Exercise = () => {
 
 export default Exercise;
 
-export const getServerSideProps = withPageAuth({
-  redirectTo: '/login',
-});
+export const getStaticPaths: GetStaticPaths = async () => {
+  const workoutLines = await prisma.workoutLine.findMany()
+  const paths = workoutLines.map((workoutLine) => {
+    return {
+      params: { workout: workoutLine.workoutId.toString(), exercise: workoutLine.exerciseId.toString() },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const workout = await prisma.exercise.findFirst({
+    where: { id: +params?.exercise! },
+    include: {
+      workoutLineRelation: { where: { workoutId: +params?.workout! } }
+    }
+  })
+
+  return {
+    props: { exercises: JSON.parse(JSON.stringify(workout)) },
+  };
+};
