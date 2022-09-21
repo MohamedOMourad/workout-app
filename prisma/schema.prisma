@@ -36,13 +36,12 @@ model Workout_History {
 }
 
 model Workout {
-  id        Int               @id @default(autoincrement())
-  name      String
-  imgUrl    String
-  createdAt DateTime          @default(now()) @db.Timestamp(6)
-  users     Workout_History[]
-  exercises WorkoutLine[]
-  href      String
+  id          Int               @id @default(autoincrement())
+  name        String
+  imgUrl      String
+  createdAt   DateTime          @default(now()) @db.Timestamp(6)
+  users       Workout_History[]
+  workoutLineRelation WorkoutLine[]
 }
 
 model WorkoutLine {
@@ -63,7 +62,7 @@ model Exercise {
   description String
   imgUrl      String
   createdAt   DateTime      @default(now()) @db.Timestamp(6)
-  workouts    WorkoutLine[]
+  workoutLineRelation WorkoutLine[]
 }
 
 model UserRecord {
