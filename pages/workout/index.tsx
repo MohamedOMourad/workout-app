@@ -1,11 +1,12 @@
 import { Workout } from "@prisma/client";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { GetStaticProps } from "next";
 import React from "react";
 import Workouts from "../../components/workouts";
 import { prisma } from "../../lib/prisma";
 
-const BrowseWorkout = ({ updatedWorkout }: { updatedWorkout: Workout[] }) => {
-  console.log(updatedWorkout)
+const BrowseWorkout = ({ workouts }: { workouts: Workout[] }) => {
+  console.log(workouts)
   return (
     <div className="min-h-screen bg-gray-100">
       <div className=" text-center mt-16">
@@ -17,24 +18,16 @@ const BrowseWorkout = ({ updatedWorkout }: { updatedWorkout: Workout[] }) => {
           limits.
         </p>
       </div>
-      <Workouts updatedWorkout={updatedWorkout} />
+      <Workouts workouts={workouts} />
     </div>
   );
 };
 
 export default BrowseWorkout;
 
-export const getServerSideProps = withPageAuth({
-  redirectTo: "/login",
-  async getServerSideProps() {
-    // Access the user object
-    const workouts = await prisma.workout.findMany();
-    const updatedWorkout = workouts.map((workout) => {
-      return {
-        ...workout,
-        createdAt: workout.createdAt.getTime(),
-      }
-    });
-    return { props: { updatedWorkout } };
-  }
-});
+export const getStaticProps: GetStaticProps = async () => {
+  const workouts = await prisma.workout.findMany()
+  return {
+    props: { workouts: JSON.parse(JSON.stringify(workouts)) },
+  };
+};
