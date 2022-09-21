@@ -1,7 +1,8 @@
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import React from 'react'
-import StockChart from '../components/StockChart';
+import StockChart from './StockChart';
 const data = {
+    
     stockFullName: "SW Limited.",
     stockShortName: "ASX:SFW",
     price: {
@@ -48,8 +49,8 @@ const data = {
 };
 const Progress = () => {
     return (
-        <div className="min-w-screen min-h-screen bg-zinc-100 px-5 py-5">
-            <div className="flex flex-wrap py-10 min-w-screen min-h-screen">
+        <div className="min-w-screen min-h-screen ">
+            <div className="flex flex-wrap  min-w-screen min-h-screen">
                 <StockChart info={data} />
                 <StockChart info={data} />
                 <StockChart info={data} />
