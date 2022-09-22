@@ -95,20 +95,20 @@ const Home: NextPage = ({ updatedUser }: { updatedUser?: User }) => {
                       </dd>
                     </dl>
                   </div>
-                
+
                 </div>
               </div>
               <div className="bg-gray-50 px-5 py-3">
               </div>
             </div>
           </div>
-       
+
           <div >
-          <p className='my-5 text-lg font-bold'>Progress</p>
-          <Progress/>
+            <p className='my-5 text-lg font-bold'>Progress</p>
+            <Progress />
           </div>
         </div>
-       
+
       </div>
     </>
   )

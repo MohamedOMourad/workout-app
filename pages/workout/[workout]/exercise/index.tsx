@@ -1,12 +1,18 @@
-import { Exercise, Workout, WorkoutLine } from '@prisma/client';
-import { withPageAuth } from '@supabase/auth-helpers-nextjs';
+import { useUser } from '@supabase/auth-helpers-react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import React from 'react'
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react'
 import Exercises from '../../../../components/exercise'
 import { prisma } from "../../../../lib/prisma";
 
 const index = ({ exercises, id }: { exercises: any, id: string }) => {
-  console.log(exercises.workoutLineRelation)
+  const { user, isLoading } = useUser();
+  const router = useRouter()
+  useEffect(() => {
+    if (!user && isLoading === false) {
+      router.push("/login")
+    }
+  }, [user]);
   return (
     <div>
       <Exercises exercises={exercises.workoutLineRelation} id={id} />

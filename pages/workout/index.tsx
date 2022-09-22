@@ -1,12 +1,20 @@
 import { Workout } from "@prisma/client";
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { useUser } from '@supabase/auth-helpers-react';
 import { GetStaticProps } from "next";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import Workouts from "../../components/workouts";
 import { prisma } from "../../lib/prisma";
 
 const BrowseWorkout = ({ workouts }: { workouts: Workout[] }) => {
-  console.log(workouts)
+  const { user, isLoading } = useUser();
+  const router = useRouter()
+  console.log(user);
+  useEffect(() => {
+    if (!user && isLoading === false) {
+      router.push("/login")
+    }
+  }, [user]);
   return (
     <div className="min-h-screen bg-gray-100">
       <div className=" text-center mt-16">
