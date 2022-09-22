@@ -2,7 +2,6 @@ import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   Bars3BottomLeftIcon,
-  BellIcon,
   CalendarIcon,
   ChartBarIcon,
   HomeIcon,
@@ -11,22 +10,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
-import { supabaseClient, withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+
 const navigation = [
   { name: "Dashboard", href: "/", icon: HomeIcon, current: true },
   { name: "Browse WorkOut", href: "/workout", icon: BoltIcon, current: false },
-  {
-    name: "Calendar",
-    href: "/calenderLog",
-    icon: CalendarIcon,
-    current: false,
-  },
+  { name: "Calendar", href: "/calenderLog", icon: CalendarIcon, current: false, },
   { name: "Progress", href: "/progress", icon: ChartBarIcon, current: false },
-];
-const userNavigation = [
-  // { name: "Your Profile", href: "#" },
-  // { name: "Settings", href: "#" },
-  { name: "Sign out", href: "" },
 ];
 
 function classNames(...classes: any) {
@@ -256,25 +246,23 @@ const Layout = ({ children }: childrenProps) => {
                         leaveTo="transform opacity-0 scale-95"
                       >
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          {userNavigation.map((item) => (
-                            <Menu.Item key={item.name}>
-                              {({ active }) => (
-                                <a
-                                  href={item.href}
-                                  onClick={() => {
-                                    supabaseClient.auth.signOut(),
-                                      router.push("/login");
-                                  }}
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
-                                  )}
-                                >
-                                  {item.name}
-                                </a>
-                              )}
-                            </Menu.Item>
-                          ))}
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href={""}
+                                onClick={() => {
+                                  supabaseClient.auth.signOut(),
+                                    router.push("/login");
+                                }}
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Sign out
+                              </a>
+                            )}
+                          </Menu.Item>
                         </Menu.Items>
                       </Transition>
                     </Menu>
