@@ -10,12 +10,11 @@ const Exercise = ({ exercises }: any) => {
   const [isPlay, setplaying] = useState(false);
   const { user, isLoading } = useUser();
   const router = useRouter()
-  console.log(user)
   useEffect(() => {
-    if (!user && isLoading === false) {
+    if (user === null && isLoading === false) {
       router.push("/login")
     }
-  }, [user]);
+  }, [isLoading]);
   return (
     <div className="min-h-screen bg-gray-100 ">
       <div className="flex w-full flex-wrap">
@@ -36,7 +35,7 @@ const Exercise = ({ exercises }: any) => {
       </div>
       <div className="flex flex-wrap w-full">
         <div className="lg:w-2/3 w-full">
-          <WorkoutTable exercises={exercises} />
+          <WorkoutTable exercises={exercises} sets={exercises.workoutLineRelation[0].set } />
         </div>
         <div className=" lg:w-1/3 flex flex-col items-center w-full">
           <Timer />

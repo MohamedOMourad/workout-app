@@ -9,12 +9,11 @@ import { prisma } from "../../lib/prisma";
 const BrowseWorkout = ({ workouts }: { workouts: Workout[] }) => {
   const { user, isLoading } = useUser();
   const router = useRouter()
-  console.log(user);
   useEffect(() => {
-    if (!user && isLoading === false) {
+    if (user === null && isLoading === false) {
       router.push("/login")
     }
-  }, [user]);
+  }, [isLoading]);
   return (
     <div className="min-h-screen bg-gray-100">
       <div className=" text-center mt-16">

@@ -9,10 +9,10 @@ const index = ({ exercises, id }: { exercises: any, id: string }) => {
   const { user, isLoading } = useUser();
   const router = useRouter()
   useEffect(() => {
-    if (!user && isLoading === false) {
+    if (user === null && isLoading === false) {
       router.push("/login")
     }
-  }, [user]);
+  }, [isLoading]);
   return (
     <div>
       <Exercises exercises={exercises.workoutLineRelation} id={id} />

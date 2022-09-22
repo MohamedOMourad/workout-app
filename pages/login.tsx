@@ -1,14 +1,10 @@
 import { useFormik } from "formik";
 import Link from "next/link";
-import { withPageAuth, getUser } from '@supabase/auth-helpers-nextjs';
-// import { useUser } from '@supabase/auth-helpers-react';
 import { supabaseClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from "next/router";
-// import { useEffect, useState } from "react";
 
 const Login = () => {
   const router = useRouter()
-  // const { user, error } = useUser();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -16,7 +12,6 @@ const Login = () => {
     },
     onSubmit: async (values) => {
       const res = await supabaseClient.auth.signIn({ ...values })
-      console.log(res);
       formik.resetForm();
       router.push("/")
     },
