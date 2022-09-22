@@ -1,6 +1,7 @@
 import { User } from '@prisma/client';
 import { getUser, withPageAuth } from '@supabase/auth-helpers-nextjs';
 import type { NextPage } from 'next'
+import Progress from '../components/progress';
 import WorkoutTable from '../components/workoutTable'
 import { prisma } from "../lib/prisma";
 
@@ -94,13 +95,20 @@ const Home: NextPage = ({ updatedUser }: { updatedUser?: User }) => {
                       </dd>
                     </dl>
                   </div>
+                
                 </div>
               </div>
               <div className="bg-gray-50 px-5 py-3">
               </div>
             </div>
           </div>
+       
+          <div >
+          <p className='my-5 text-lg font-bold'>Progress</p>
+          <Progress/>
+          </div>
         </div>
+       
       </div>
     </>
   )
