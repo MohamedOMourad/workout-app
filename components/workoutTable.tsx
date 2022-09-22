@@ -1,4 +1,4 @@
-const WorkoutTable = () => {
+const WorkoutTable = ({ exercises }: any) => {
   return (
     <div className="m-10">
       <div className="flex flex-col">
@@ -41,14 +41,14 @@ const WorkoutTable = () => {
                       <input
                         id="email"
                         className="block w-full p-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder="you@example.com"
+                        placeholder={`${exercises.workoutLineRelation[0].weight} kgs`}
                       />
                     </td>
                     <td className="p-6">
                       <input
                         id="email"
                         className="block w-full p-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder="you@example.com"
+                        placeholder={exercises.workoutLineRelation[0].reps}
                       />
                     </td>
                     <td className="p-6">

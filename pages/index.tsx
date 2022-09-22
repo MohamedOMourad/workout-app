@@ -1,6 +1,7 @@
 import { User } from '@prisma/client';
 import { getUser, withPageAuth } from '@supabase/auth-helpers-nextjs';
 import type { NextPage } from 'next'
+import Progress from '../components/progress';
 import WorkoutTable from '../components/workoutTable'
 import { prisma } from "../lib/prisma";
 
@@ -94,54 +95,20 @@ const Home: NextPage = ({ updatedUser }: { updatedUser?: User }) => {
                       </dd>
                     </dl>
                   </div>
+                
                 </div>
               </div>
               <div className="bg-gray-50 px-5 py-3">
               </div>
             </div>
           </div>
-          <p className='my-5 text-lg font-bold	'>Today's workout (Leg Day)</p>
-          <div className="flow-root">
-            <ul role="list" className="-mb-8">
-              <li >
-                <div className="relative">
-                  <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-400" aria-hidden="true" />
-                  <div className="relative">
-                    <div>
-                      <img className={'h-10 w-10 rounded-full flex items-center justify-center ring-8 ring-white'} src='./assets/images/login.jpg' />
-                    </div>
-                    <div>
-                      <WorkoutTable />
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li >
-                <div className="relative pb-8">
-                  <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
-
-                  <div className="relative flex space-x-3">
-                    <div>
-                      <span
-                        className={'h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white'}
-                      >
-
-                      </span>
-                    </div>
-                    <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                      <div>
-                        <p className="text-sm text-gray-500">
-                        </p>
-                      </div>
-                      <div className="whitespace-nowrap text-right text-sm text-gray-500">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
+       
+          <div >
+          <p className='my-5 text-lg font-bold'>Progress</p>
+          <Progress/>
           </div>
         </div>
+       
       </div>
     </>
   )
