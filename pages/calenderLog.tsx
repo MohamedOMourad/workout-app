@@ -4,7 +4,7 @@ import Calender from "../components/calender";
 
 const CalenderLog = () => {
   return (
-    <div className="min-h-screen min-w-screen bg-gray-100 px-56 py-10">
+    <div className="h-screen w-screen bg-gray-100 px-56 py-10">
       <div className=" lg:w-1/2 w-full">
         <h1 className="mb-5 text-xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
           Workout history
@@ -41,8 +41,9 @@ const CalenderLog = () => {
           </div>
         </div>
       </div>
-
-      <Calender />
+      <div>
+        <Calender />
+      </div>
     </div>
   );
 };
