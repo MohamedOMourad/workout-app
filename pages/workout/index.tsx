@@ -33,7 +33,7 @@ const BrowseWorkout = ({ workouts }: { workouts: Workout[] }) => {
 export default BrowseWorkout;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const workouts = await prisma.workout.findMany()
+  const workouts = await prisma?.workout.findMany()
   return {
     props: { workouts: JSON.parse(JSON.stringify(workouts)) },
   };

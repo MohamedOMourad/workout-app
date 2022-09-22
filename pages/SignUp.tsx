@@ -19,9 +19,18 @@ export default function SignUp() {
       height: ""
     },
     onSubmit: async (values) => {
-      const res = await supabaseClient.auth.signUp({ email: values.email, password: values.password })
+      const res = await supabaseClient.auth.signUp({ email: values.email, password: values.password }, {
+        data: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          gender: values.gender,
+          weight: values.weight,
+          height: values.height
+        }
+      })
+
+      await createUser(values, res.user?.id)
       await supabaseClient.auth.signIn({ email: values.email, password: values.password })
-      await createUser(values)
       router.push("/")
     },
     // validationSchema: Yup.object({
@@ -184,7 +193,7 @@ export default function SignUp() {
                       <input
                         id="age"
                         name="age"
-                        type="number"
+                        type="text"
                         autoComplete="age"
                         required
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -207,7 +216,7 @@ export default function SignUp() {
                       <input
                         id="weight"
                         name="weight"
-                        type="number"
+                        type="text"
                         autoComplete="weight"
                         required
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -230,7 +239,7 @@ export default function SignUp() {
                       <input
                         id="height"
                         name="height"
-                        type="number"
+                        type="text"
                         autoComplete="height"
                         required
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"

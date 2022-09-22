@@ -118,9 +118,9 @@ export default Home;
 export const getServerSideProps = withPageAuth({
   redirectTo: '/login', async getServerSideProps(ctx) {
     const { user } = await getUser(ctx);
-    const User = await prisma.user.findUnique({ where: { email: user?.email } })
+    const User = await prisma?.user.findUnique({ where: { email: user?.email } })
     const updatedUser = { ...User, createdAt: User?.createdAt.getTime() }
-    return { props: { updatedUser } };
+    return { props: { updatedUser: JSON.parse(JSON.stringify(updatedUser)) } };
   }
 });
 
