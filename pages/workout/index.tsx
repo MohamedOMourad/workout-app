@@ -5,7 +5,6 @@ import Workouts from "../../components/workouts";
 import { prisma } from "../../lib/prisma";
 
 const BrowseWorkout = ({ updatedWorkout }: { updatedWorkout: Workout[] }) => {
-  console.log(updatedWorkout)
   return (
     <div className="min-h-screen bg-gray-100">
       <div className=" text-center mt-16">
@@ -27,14 +26,7 @@ export default BrowseWorkout;
 export const getServerSideProps = withPageAuth({
   redirectTo: "/login",
   async getServerSideProps() {
-    // Access the user object
     const workouts = await prisma.workout.findMany();
-    const updatedWorkout = workouts.map((workout) => {
-      return {
-        ...workout,
-        createdAt: workout.createdAt.getTime(),
-      }
-    });
-    return { props: { updatedWorkout } };
+    return { props: { workouts: JSON.parse(JSON.stringify(workouts)) } };
   }
 });
