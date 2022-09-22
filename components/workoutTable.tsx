@@ -1,14 +1,19 @@
 import { useFormik } from 'formik';
+import { useState } from 'react';
+import { addUserRecord } from '../utils/API';
+import CheckBox from './checkBox';
 
-const WorkoutTable = ({ exercises, sets }: any) => {
+const WorkoutTable = ({ exercise, sets }: any) => {
+  const [step, setStep] = useState(0)
+
   const formik = useFormik({
     initialValues: {
-      reps: exercises.workoutLineRelation[0].reps,
-      weight: exercises.workoutLineRelation[0].weight
+      reps: exercise.workoutLineRelation[0].reps,
+      weight: exercise.workoutLineRelation[0].weight
     },
-    onSubmit: (values) => {
-      // addUserLog(values.reps, values.weight, index, lineId)
-      console.log(values)
+    onSubmit: async (values) => {
+      addUserRecord(values.weight, values.reps,  step, exercise.workoutLineRelation[0].id)
+      console.log(values, step)
     }
   })
   return (
@@ -45,34 +50,11 @@ const WorkoutTable = ({ exercises, sets }: any) => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {sets.map()}
-                  <tr>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      1
-                    </td>
-                    <td className="p-6">
-                      <input
-                        id="email"
-                        className="block w-full p-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder={`${exercises.workoutLineRelation[0].weight} kgs`}
-                      />
-                    </td>
-                    <td className="p-6">
-                      <input
-                        id="email"
-                        className="block w-full p-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder={exercises.workoutLineRelation[0].reps}
-                      />
-                    </td>
-                    <td className="p-6">
-                      <input
-                        id={""}
-                        name={""}
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                      />
-                    </td>
-                  </tr>
+                  {sets.map((set: any, index: number) => (
+                    <tr key={index}>
+                      <CheckBox index={index} set={set} formik={formik} setStep={setStep} />
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

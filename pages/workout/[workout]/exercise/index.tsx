@@ -23,7 +23,7 @@ const index = ({ exercises, id }: { exercises: any, id: string }) => {
 export default index;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const workouts = await prisma.workout.findMany()
+  const workouts = await prisma?.workout.findMany()
   const paths = workouts.map((workout) => {
     return {
       params: { workout: workout.id.toString() },
@@ -37,7 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const workout = await prisma.workout.findFirst({
+  const workout = await prisma?.workout.findFirst({
     where: { id: +params?.workout! },
     include: {
       workoutLineRelation: { select: { exercise: true } }

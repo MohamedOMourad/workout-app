@@ -3,12 +3,11 @@ import axios from "axios";
 import { prisma } from '../../../lib/prisma';
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<any>
+    req: NextApiRequest,
+    res: NextApiResponse<any>
 ) {
-
-    const { firstName, lastName, email, password, gender, age, height, weight } =
-        req.body;
+console.log(req.body)
+    const {id, firstName, lastName, email, password, gender, age, height, weight } = req.body;
     const data = await axios.get("https://randomuser.me/api/");
     const imgUrl = data.data.results["0"].picture.thumbnail;
     switch (req.method) {
@@ -23,6 +22,7 @@ export default async function handler(
             try {
                 const newUser = await prisma.user.create({
                     data: {
+                        id,
                         firstName,
                         lastName,
                         email,
@@ -37,7 +37,9 @@ export default async function handler(
                 res.status(200).json({ newUser });
             } catch (error) {
                 console.log(error)
-                res.status(400).json({massage:"User already exist"})
+                res.status(400).json({
+                    massage: console.log(error)
+                })
             }
             break;
         default:
