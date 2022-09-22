@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import Timer from "../../../../components/timer";
 import WorkoutTable from "../../../../components/workoutTable";
 import { prisma } from "../../../../lib/prisma";
 const Exercise = ({ exercises }: any) => {
@@ -22,7 +23,7 @@ const Exercise = ({ exercises }: any) => {
           <iframe
             width={"100%"}
             height="315"
-            src="https://www.youtube.com/embed/oDdkytliOqE"
+            src=""
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen></iframe>
@@ -38,32 +39,7 @@ const Exercise = ({ exercises }: any) => {
           <WorkoutTable exercises={exercises} />
         </div>
         <div className=" lg:w-1/3 flex flex-col items-center w-full">
-          {isPlay ?
-            <CountdownCircleTimer
-              isPlaying
-              duration={30}
-              colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
-              colorsTime={[30, 20, 10, 0]}
-            >
-              {({ remainingTime }) => remainingTime}
-            </CountdownCircleTimer>
-            :
-            <CountdownCircleTimer
-              duration={30}
-              colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
-              colorsTime={[30, 20, 10, 0]}
-            >
-              {({ remainingTime }) => remainingTime}
-            </CountdownCircleTimer>
-          }
-
-          <button
-            type="button"
-            onClick={() => setplaying(!isPlay)}
-            className="m-2  inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            {isPlay ? "Pause" : "Start"}
-          </button>
+          <Timer />
         </div>
       </div>
     </div>
