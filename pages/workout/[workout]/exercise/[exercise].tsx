@@ -1,12 +1,20 @@
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { useUser } from "@supabase/auth-helpers-react";
 import { GetStaticPaths, GetStaticProps } from "next";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import WorkoutTable from "../../../../components/workoutTable";
 import { prisma } from "../../../../lib/prisma";
 const Exercise = ({ exercises }: any) => {
-  console.log(exercises)
   const [isPlay, setplaying] = useState(false);
+  const { user, isLoading } = useUser();
+  const router = useRouter()
+  console.log(user)
+  useEffect(() => {
+    if (!user && isLoading === false) {
+      router.push("/login")
+    }
+  }, [user]);
   return (
     <div className="min-h-screen bg-gray-100 ">
       <div className="flex w-full flex-wrap">
