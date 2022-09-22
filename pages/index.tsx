@@ -6,7 +6,6 @@ import WorkoutTable from '../components/workoutTable'
 import { prisma } from "../lib/prisma";
 
 const Home: NextPage = ({ updatedUser }: { updatedUser?: User }) => {
-  console.log(updatedUser)
   return (
     <>
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-zinc-100 py-10 w-full min-h-screen">

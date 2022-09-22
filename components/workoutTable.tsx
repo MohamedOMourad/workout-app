@@ -1,4 +1,16 @@
-const WorkoutTable = ({ exercises }: any) => {
+import { useFormik } from 'formik';
+
+const WorkoutTable = ({ exercises, sets }: any) => {
+  const formik = useFormik({
+    initialValues: {
+      reps: exercises.workoutLineRelation[0].reps,
+      weight: exercises.workoutLineRelation[0].weight
+    },
+    onSubmit: (values) => {
+      // addUserLog(values.reps, values.weight, index, lineId)
+      console.log(values)
+    }
+  })
   return (
     <div className="m-10">
       <div className="flex flex-col">
@@ -33,6 +45,7 @@ const WorkoutTable = ({ exercises }: any) => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
+                  {sets.map()}
                   <tr>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       1
