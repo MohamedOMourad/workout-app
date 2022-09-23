@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import { createUser } from "../utils/API";
 import { supabaseClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from "next/router";
