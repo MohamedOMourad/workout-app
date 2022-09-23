@@ -11,7 +11,7 @@ const CheckBox = ({ index, formik, set, setStep }: any) => {
             </td>
             <td className="p-6">
                 <input
-                    id="weight"
+                    id={index + 1}
                     name="weight"
                     className="block w-full p-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     placeholder={`${set.weight} kgs`}
