@@ -4,8 +4,9 @@ import PersonalRecordsCard from '../components/personalRecordsCard';
 import Progress from '../components/progress';
 import { prisma } from "../lib/prisma";
 
-const Home: NextPage = ({ records, user }: any) => {
-  console.log(records)
+const Home: NextPage = ({ personalRecords, userProgressChart, user }: any) => {
+  // console.log(userProgressChart)
+  // console.log(personalRecords)
   return (
     <>
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-zinc-100 py-10 w-full min-h-screen">
@@ -26,10 +27,10 @@ const Home: NextPage = ({ records, user }: any) => {
         </div>
         <div className='m-5'>
           <p className='my-5 text-lg font-bold'>Personal Records 🏆</p>
-          <PersonalRecordsCard records={records } />
+          <PersonalRecordsCard personalRecords={personalRecords} />
           <div >
             <p className='my-5 text-lg font-bold'>Progress</p>
-            <Progress />
+            <Progress userProgressChart={userProgressChart} />
           </div>
         </div>
 
@@ -43,12 +44,29 @@ export default Home;
 export const getServerSideProps = withPageAuth({
   redirectTo: '/login', async getServerSideProps(ctx) {
     const { user } = await getUser(ctx);
-    // const Record = await prisma.exercise.findMany({
-    //   orderBy: [{ createdAt: 'desc' }],
-    //   take: 4
-    // })
 
-    const userLogs = await prisma.workoutLine.findMany({
+
+    const userProgressChart = await prisma.workoutLine.findMany({
+      include: {
+        users: {
+          where: { userId: user.id },
+          select: {
+            weight: true
+          }
+        }, exercise: {
+          select: {
+            name: true
+          }
+        }
+      },
+      orderBy: {
+        exercise: {
+          createdAt: 'desc',
+        }
+      },
+    })
+
+    const personalRecords = await prisma.workoutLine.findMany({
       include: {
         users: {
           where: { userId: user.id },
@@ -70,6 +88,6 @@ export const getServerSideProps = withPageAuth({
         }
       },
     })
-    return { props: { records: JSON.parse(JSON.stringify(userLogs))} };
+    return { props: { personalRecords: JSON.parse(JSON.stringify(personalRecords)), userProgressChart: JSON.parse(JSON.stringify(userProgressChart)) } };
   }
 });
