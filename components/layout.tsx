@@ -3,16 +3,14 @@ import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   Bars3BottomLeftIcon,
   CalendarIcon,
-  ChartBarIcon,
   HomeIcon,
   XMarkIcon,
   BoltIcon,
 } from "@heroicons/react/24/outline";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-
+import Image from 'next/image';
 const navigation = [
   { name: "Dashboard", href: "/", icon: HomeIcon, current: true },
   { name: "Browse WorkOut", href: "/workout", icon: BoltIcon, current: false },
@@ -97,15 +95,7 @@ const Layout = ({ children }: childrenProps) => {
                           </button>
                         </div>
                       </Transition.Child>
-                      <div className="flex flex-shrink-0 items-center px-4">
-                        <img
-                          className="h-8 w-auto"
-                          src={
-                            "https://kxjnhcqeqmnytuolbufe.supabase.co/storage/v1/object/public/workout/logo-4.png"
-                          }
-                          alt="Your Company"
-                        />
-                      </div>
+          
                       <div className="mt-5 h-0 flex-1 overflow-y-auto">
                         <nav className="space-y-1 px-2">
                           {navigation.map((item) => (
@@ -150,7 +140,7 @@ const Layout = ({ children }: childrenProps) => {
                   <img
                     className="h-8 w-auto"
                     src={
-                      "https://kxjnhcqeqmnytuolbufe.supabase.co/storage/v1/object/public/workout/logo-4.png"
+                      "https://rirpgoswmpvwobxaqbtk.supabase.co/storage/v1/object/public/workout/logo-4.png"
                     }
                     alt="TAWWR workout"
                   />
@@ -195,9 +185,9 @@ const Layout = ({ children }: childrenProps) => {
                   <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
                 <div className="flex flex-1 justify-end px-4">
-                  
+
                   <div className="ml-4 flex items-center md:ml-6">
-                   
+
 
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
