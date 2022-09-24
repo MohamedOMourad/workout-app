@@ -1,11 +1,11 @@
-import { User } from '@prisma/client';
 import { getUser, withPageAuth } from '@supabase/auth-helpers-nextjs';
 import type { NextPage } from 'next'
+import PersonalRecordsCard from '../components/personalRecordsCard';
 import Progress from '../components/progress';
-import WorkoutTable from '../components/workoutTable'
 import { prisma } from "../lib/prisma";
 
-const Home: NextPage = ({ updatedUser }: { updatedUser?: User }) => {
+const Home: NextPage = ({ records, user }: any) => {
+  console.log(records)
   return (
     <>
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-zinc-100 py-10 w-full min-h-screen">
@@ -19,89 +19,14 @@ const Home: NextPage = ({ updatedUser }: { updatedUser?: User }) => {
               />
             </div>
             <div className="ml-3">
-              <p className="text-2xl font-bold text-gray-900 group-hover:text-gray-900">Good morning, {updatedUser?.firstName}</p>
+              <p className="text-2xl font-bold text-gray-900 group-hover:text-gray-900">Good morning, {user.user_metadata.firstName}</p>
               <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">🔥10 Day Streak</p>
             </div>
           </div>
         </div>
         <div className='m-5'>
           <p className='my-5 text-lg font-bold'>Personal Records 🏆</p>
-          <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="overflow-hidden rounded-lg bg-white shadow">
-              <div className="p-5">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                  </div>
-                  <div className="ml-5 w-0 flex-1">
-                    <dl>
-                      <dt className="truncate text-sm font-medium text-gray-500">Squad</dt>
-                      <dd>
-                        <div className="text-lg font-medium text-gray-900">550ibs</div>
-                      </dd>
-                    </dl>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-50 px-5 py-3">
-              </div>
-            </div>
-            <div className="overflow-hidden rounded-lg bg-white shadow">
-              <div className="p-5">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                  </div>
-                  <div className="ml-5 w-0 flex-1">
-                    <dl>
-                      <dt className="truncate text-sm font-medium text-gray-500">Squad</dt>
-                      <dd>
-                        <div className="text-lg font-medium text-gray-900">550ibs</div>
-                      </dd>
-                    </dl>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-50 px-5 py-3">
-              </div>
-            </div>
-            <div className="overflow-hidden rounded-lg bg-white shadow">
-              <div className="p-5">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                  </div>
-                  <div className="ml-5 w-0 flex-1">
-                    <dl>
-                      <dt className="truncate text-sm font-medium text-gray-500">Squad</dt>
-                      <dd>
-                        <div className="text-lg font-medium text-gray-900">550ibs</div>
-                      </dd>
-                    </dl>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-50 px-5 py-3">
-              </div>
-            </div>
-            <div className="overflow-hidden rounded-lg bg-white shadow">
-              <div className="p-5">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                  </div>
-                  <div className="ml-5 w-0 flex-1">
-                    <dl>
-                      <dt className="truncate text-sm font-medium text-gray-500">Squad</dt>
-                      <dd>
-                        <div className="text-lg font-medium text-gray-900">550ibs</div>
-                      </dd>
-                    </dl>
-                  </div>
-
-                </div>
-              </div>
-              <div className="bg-gray-50 px-5 py-3">
-              </div>
-            </div>
-          </div>
-
+          <PersonalRecordsCard records={records } />
           <div >
             <p className='my-5 text-lg font-bold'>Progress</p>
             <Progress />
@@ -118,9 +43,33 @@ export default Home;
 export const getServerSideProps = withPageAuth({
   redirectTo: '/login', async getServerSideProps(ctx) {
     const { user } = await getUser(ctx);
-    const User = await prisma?.user.findUnique({ where: { email: user?.email } })
-    const updatedUser = { ...User, createdAt: User?.createdAt.getTime() }
-    return { props: { updatedUser: JSON.parse(JSON.stringify(updatedUser)) } };
+    // const Record = await prisma.exercise.findMany({
+    //   orderBy: [{ createdAt: 'desc' }],
+    //   take: 4
+    // })
+
+    const userLogs = await prisma.workoutLine.findMany({
+      include: {
+        users: {
+          where: { userId: user.id },
+          orderBy: [
+            {
+              weight: 'desc'
+            }
+          ],
+          take: 1
+        }, exercise: {
+          select: {
+            name: true
+          }
+        }
+      },
+      orderBy: {
+        exercise: {
+          createdAt: 'desc',
+        }
+      },
+    })
+    return { props: { records: JSON.parse(JSON.stringify(userLogs))} };
   }
 });
-
