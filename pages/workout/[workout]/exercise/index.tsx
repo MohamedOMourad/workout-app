@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import Exercises from '../../../../components/exercise'
 import { prisma } from "../../../../lib/prisma";
 
-const index = ({ exercises, id }: { exercises: any, id: string }) => {
+const Index = ({ exercises, id }: { exercises: any, id: string }) => {
   const { user, isLoading } = useUser();
   const router = useRouter()
   useEffect(() => {
@@ -20,7 +20,7 @@ const index = ({ exercises, id }: { exercises: any, id: string }) => {
   )
 }
 
-export default index;
+export default Index;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const workouts = await prisma?.workout.findMany()
