@@ -10,7 +10,7 @@ const Progress = (userProgressChart: any) => {
     // }
     return (
         <div className="min-w-screen min-h-screen ">
-            <div  className="flex flex-wrap  min-w-screen min-h-screen">
+            <div  className="flex flex-wrap  min-w-screen min-h-screen" key={userProgressChart.id}>
                 {userProgressChart?.userProgressChart?.map((chart: any) => (
                         <StockChart info={chart.users} />
                 ))}
