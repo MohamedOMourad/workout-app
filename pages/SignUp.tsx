@@ -19,6 +19,7 @@ export default function SignUp() {
     },
     onSubmit: async (values) => {
       const res = await supabaseClient.auth.signUp({ email: values.email, password: values.password }, {
+        
         data: {
           firstName: values.firstName,
           lastName: values.lastName,
@@ -27,7 +28,7 @@ export default function SignUp() {
           height: values.height
         }
       })
-
+        console.log(res)
       await createUser(values, res.user?.id)
       await supabaseClient.auth.signIn({ email: values.email, password: values.password })
       router.push("/")
@@ -60,7 +61,7 @@ export default function SignUp() {
             <div>
               <img
                 width={"180px"}
-                src="./assets/icons/logo-4.png"
+                src="https://nipsxawvnjrdqkigovgl.supabase.co/storage/v1/object/public/workout/logo-4.png"
                 alt="logo"
               />
             </div>

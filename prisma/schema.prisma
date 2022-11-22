@@ -54,10 +54,12 @@ model WorkoutLine {
 }
 
 model Exercise {
-  id                  Int           @id @default(autoincrement())
-  name                String
-  description         String
-  imgUrl              String
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  imgUrl      String
+  videoUrl    String
+
   createdAt           DateTime      @default(now()) @db.Timestamp(6)
   workoutLineRelation WorkoutLine[]
 }

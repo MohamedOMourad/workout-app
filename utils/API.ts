@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const createUser = async (values: any, id: any) => {
     console.log(id)
+    console.log(id)
     const res = await axios.post('/api/user', { ...values, id: id })
     const user = await res.data.newUser;
 }
