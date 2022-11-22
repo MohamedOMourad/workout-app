@@ -13,7 +13,7 @@ const PersonalRecordsCard = ({ personalRecords }: any) => {
                                 <dl>
                                     <dt className="truncate text-sm font-medium text-gray-500">{record.exercise.name}</dt>
                                     <dd>
-                                        <div className="text-lg font-medium text-gray-900">{record.users[0].weight}</div>
+                                        <div className="text-lg font-medium text-gray-900">{record.users[0]?.weight}</div>
                                     </dd>
                                 </dl>
                             </div>

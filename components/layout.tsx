@@ -140,7 +140,7 @@ const Layout = ({ children }: childrenProps) => {
                   <img
                     className="h-8 w-auto"
                     src={
-                      "https://rirpgoswmpvwobxaqbtk.supabase.co/storage/v1/object/public/workout/logo-4.png"
+                      "https://nipsxawvnjrdqkigovgl.supabase.co/storage/v1/object/public/workout/logo-4.png"
                     }
                     alt="TAWWR workout"
                   />

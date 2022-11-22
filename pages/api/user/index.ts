@@ -8,8 +8,8 @@ export default async function handler(
 ) {
 console.log(req.body)
     const {id, firstName, lastName, email, password, gender, age, height, weight } = req.body;
-    const data = await axios.get("https://randomuser.me/api/");
-    const imgUrl = data.data.results["0"].picture.thumbnail;
+    // const data = await axios.get("https://randomuser.me/api/");
+    const imgUrl = "qweqwe"
     switch (req.method) {
         case "GET":
             const user = await prisma.user.findFirst({ where: { email } });
